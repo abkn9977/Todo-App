@@ -1,0 +1,170 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.todo-container {
+    width: 100%;
+    min-height: 100vh;
+    background: #030214;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.todo {
+    width: 505px;
+    min-height: 560px;
+    background: #030214;
+    box-shadow: 0 5px 10px rgba(255, 255, 255, .2);
+    border-radius: 30px;
+    text-align: center;
+    padding: 20px 10px;
+    margin: 30px 0;
+    overflow: hidden;
+}
+
+.todo-title {
+    width: 100%;
+    text-align: center;
+    color: yellow;
+    padding: 10px 0 5px 0;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.todo-form {
+    width: 100%;
+    padding: 10px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.todo-form p {
+    padding: 5px 0;
+    font-family: 'Poppins', sans-serif;
+    font-size: .8rem;
+    color: #ff0000;
+}
+
+.todo-form form {
+    width: 75%;
+    display: flex;
+    justify-content: center;
+}
+
+.todo-form form input {
+    width: 90%;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.todo-form form input, .todo-form form button {
+    border: none;
+    outline: none;
+    padding: 5px 10px;
+}
+
+.todo-form form button {
+    width: 10%;
+    /* border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px; */
+    /* border-radius: 5px; */
+    background: #37ff04;
+    color: #030214;
+    cursor: pointer;
+    box-shadow: 0 0 2px 2px;
+    transition: .3s;
+}
+
+.todo-form form button:hover {
+    opacity: .5;
+}
+
+.todo-list {
+    width: 100%;
+    margin: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.todo-list .task {
+    width: 85%;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 5px 0;
+}
+
+.todo-list .complete {
+    opacity: .5;
+}
+
+.todo-list .complete .task-text {
+    text-decoration: line-through;
+}
+
+.todo-list .white{
+    background: #ffffff;
+}
+.todo-list .orange{
+    background: #ff9901;
+}
+.todo-list .green{
+    background: #18f118;
+}
+.todo-list .yellow{
+    background: #f0ff00;
+}
+.todo-list .magenta{
+    background: magenta;
+}
+.todo-list .cyan{
+    background:cyan;
+}
+.todo-list .task .task-text {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #030214;
+}
+
+.todo-list .task .btn {
+    display: flex;
+}
+
+.todo-list .task .task-text, .todo-list .task button {
+    padding: 10px;
+}
+
+.todo-list .task button {
+    border: none;
+    outline: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: .3s;
+    box-shadow: 0 0 2px 2px #030214;
+}
+
+.todo-list .task button:hover {
+    opacity: .7;
+}
+
+.todo-list .task #compTask {
+    background: #ffffff;
+    color: #37ff04
+}
+
+.todo-list .task #delTask {
+    background: #ffffff;
+    color: #ff0000;
+    margin-left: 2px;
+}
