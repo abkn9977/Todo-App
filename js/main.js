@@ -1,76 +1,106 @@
-/* Variable scope may cause problem 
-   so decare there before doc ready
-*/
-var taskComplete;
-var taskDelete;
 $(document).ready(function () {
-
-    //load all the previouly added tasks
-    for (let i = localStorage.length - 1; i >= 0; i--) {
-        $("#todoList").append(localStorage.getItem(localStorage.key(i)));
-    }
-
-    //focus to input on page load
     $("#todoText").focus();
 
-    //color array
-    var colors = ['orange', 'green', 'yellow', 'magenta', 'cyan'];
-    var colorIndex = 0;
-    //add task on todo list
+    colors = ["red", "lightgreen", "yellow", "green", "cyan"];
+    colorIndex = 0;
+
+    //show tasks if they are already exist
+    if (localStorage.getItem("todos")) {
+        todos = JSON.parse(localStorage.getItem("todos"));
+        todos.forEach(todo => {
+            $("#todoList").append(
+                "<div class='task magenta " + colors[colorIndex] + "' data-id='task'>" +
+                "<div class='task-text'>" + todo + "</div >" +
+                "<div class='btn'>" +
+                "<button class='compTask'><i class='far fa-check-circle'></i></button> " +
+                "<button class='delTask'><i class='far fa-trash-alt'></i></button> " +
+                "</div> " +
+                "</div > "
+            );
+            colorIndex++;
+            if (colorIndex >= 5) {
+                colorIndex = 0;
+            }
+        });
+    }
+
+    //add new task
     $("#todoForm").submit(function (e) {
         e.preventDefault();
-        const text = $("#todoText").val();
-        $("#todoText").val("");
-        $("#todoText").focus();
 
-        //don't add if text has only whitespaces or tabs
-        //and return 
+        text = $("#todoText").val();
+
+        $("#todoText").val("");
+
         if (!text || /^\s*$/.test(text)) {
             return;
         }
 
-        //unique id for a task
-        tid = Math.floor(Math.random() * 10000);
-
-        task = "<div class=\'task " + colors[colorIndex] + "\' data-id=\'task" + tid + "\'> " +
-            "<div class='task-text'>" + text + "</div> " +
+        const task = "<div class='task magenta " + colors[colorIndex] + "' data-id='task'>" +
+            "<div class='task-text'>" + text + "</div >" +
             "<div class='btn'>" +
-            "<button value=\'task" + tid + "\' id='compTask' onClick='taskComplete(this.value);'><i class='far fa-check-circle'></i></button>" +
-            "<button value=\'task" + tid + "\' id='delTask' onClick='taskDelete(this.value);'><i class='far fa-trash-alt'></i></button>" +
-            "</div>" +
-            "</div>";
-
-        $("#todoList").append(task);
-
-        localStorage.setItem("task" + tid, task);
+            "<button class='compTask'><i class='far fa-check-circle'></i></button> " +
+            "<button class='delTask'><i class='far fa-trash-alt'></i></button> " +
+            "</div> " +
+            "</div > ";
 
         colorIndex++;
         if (colorIndex >= 5) {
             colorIndex = 0;
         }
+        $("#todoList").append(task);
+
+        var todos;
+        if (localStorage.getItem("todos") === null) {
+            todos = [];
+        } else {
+            todos = JSON.parse(localStorage.getItem("todos"));
+        }
+
+        todos.push(text);
+
+        //set to localstorage
+        localStorage.setItem("todos", JSON.stringify(todos));
     });
 
-    //complete function 
-    taskComplete = function (val) {
-        $('[data-id="' + val + '"]').addClass('complete').css("background", "#ffffff");
-        $('[data-id="' + val + '"] #compTask i').removeClass('far');
-        $('[data-id="' + val + '"] #compTask i').addClass('fas');
-        text = $('[data-id="' + val + '"] .task-text').text();
 
-        //updating task
-        task = "<div class=\'task white complete\' data-id=\'" + val + "\'> " +
-            "<div class='task-text'>" + text + "</div> " +
-            "<div class='btn'>" +
-            "<button disabled value=\'" + val + "\' id='compTask' onClick='taskComplete(this.value);'><i class='fas fa-check-circle'></i></button>" +
-            "<button value=\'" + val + "\' id='delTask' onClick='taskDelete(this.value);'><i class='far fa-trash-alt'></i></button>" +
-            "</div>" +
-            "</div>";
+    //complete task
 
-        localStorage.setItem(val, task);
-    }
+    $(document).on("click", ".compTask", function (e) {
+        $(this).parent().parent().toggleClass("complete");
+        var btnClass = "";
+        if ($(this).children("i").hasClass("far")) {
+            $(this).children("i").removeClass("far");
+            $(this).children("i").addClass("fas");
+            btnClass = "fas";
+        } else {
+            $(this).children("i").removeClass("fas");
+            $(this).children("i").addClass("far");
+            btnClass = "far";
+        }
+    });
 
-    taskDelete = function (val) {
-        $('[data-id="' + val + '"]').fadeOut(200);
-        localStorage.removeItem(val);
-    }
+    //delete task 
+
+    $(document).on("click", ".delTask", function (e) {
+        $(this).parent().parent().animate({
+            height: 0,
+            padding: 0,
+            width: 0
+        }, 700, () => {
+            $(this).parent().parent().remove();
+        });
+
+        var todos;
+        if (localStorage.getItem("todos") === null) {
+            todos = [];
+        } else {
+            todos = JSON.parse(localStorage.getItem("todos"));
+        }
+        const deleteText = $(this).parent().parent().children(".task-text").text().trim();
+
+        todos.splice(todos.indexOf(deleteText), 1);
+        
+        localStorage.setItem("todos", JSON.stringify(todos));   
+    });
 });
