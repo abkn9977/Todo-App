@@ -77,7 +77,8 @@ $(document).ready(function () {
         if(!$(this).parent().parent().hasClass("complete")){
             btnClass = "complete";
         }
-        $(".task").toggleClass("complete");
+        
+        $(this).parent().parent().toggleClass("complete");
         
         if ($(this).children("i").hasClass("far")) {
             $(this).children("i").removeClass("far");
