@@ -112,7 +112,7 @@
     margin: 5px 0;
 }
 
-.todo-list .complete {
+.todo-list .complete .task-text{
     opacity: .5;
 }
 
@@ -139,6 +139,7 @@
     background:cyan;
 }
 .todo-list .task .task-text {
+    flex: 1;
     font-family: 'Poppins', sans-serif;
     font-size: 1rem;
     font-weight: 600;
