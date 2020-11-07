@@ -7,7 +7,7 @@
 .todo-container {
     width: 100%;
     min-height: 100vh;
-    background: #030214;
+    background: #030214f5;
     color: #ffffff;
     display: flex;
     justify-content: center;
@@ -17,8 +17,7 @@
 .todo {
     width: 505px;
     min-height: 560px;
-    background: #030214;
-    box-shadow: 0 5px 10px rgba(255, 255, 255, .2);
+    box-shadow: 0px 0px 15px rgba(255, 255, 255, .2);
     border-radius: 30px;
     text-align: center;
     padding: 20px 10px;
@@ -94,7 +93,16 @@
     display: flex;
     flex-direction: column;
 }
-
+.todo-list .date-time{
+    display: flex;
+    justify-self: start;
+    font-family: 'Poppins', sans-serif;
+    font-size: .55rem;
+    padding: 0 5px;
+}
+.todo-list .date-time.complete{
+    opacity: .5;
+}
 .todo-list .task {
     width: 85%;
     display: flex;
@@ -115,17 +123,17 @@
 .todo-list .white{
     background: #ffffff;
 }
-.todo-list .orange{
-    background: #ff9901;
+.todo-list .lightgreen{
+    background: #01ff7e;
 }
-.todo-list .green{
-    background: #18f118;
+.todo-list .red{
+    background: #ff0053;
 }
 .todo-list .yellow{
     background: #f0ff00;
 }
-.todo-list .magenta{
-    background: magenta;
+.todo-list .green{
+    background:  #18f118;
 }
 .todo-list .cyan{
     background:cyan;
@@ -135,6 +143,7 @@
     font-size: 1rem;
     font-weight: 600;
     color: #030214;
+    text-align: left;
 }
 
 .todo-list .task .btn {
@@ -158,13 +167,19 @@
     opacity: .7;
 }
 
-.todo-list .task #compTask {
+.todo-list .task .compTask {
     background: #ffffff;
     color: #37ff04
 }
 
-.todo-list .task #delTask {
+.todo-list .task .delTask {
     background: #ffffff;
     color: #ff0000;
     margin-left: 2px;
+}
+
+@media only screen and (max-width:510px){
+    .todo{
+        box-shadow: none;
+    }
 }
